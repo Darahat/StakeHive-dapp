@@ -1,0 +1,27 @@
+// https://nuxt.com/docs/api/configuration/nuxt-config
+export default defineNuxtConfig({
+  compatibilityDate: '2025-05-15',
+  devtools: { enabled: true },
+  app: {
+    head: {
+      script: [
+        {
+          src: 'https://cdn.tailwindcss.com',
+          tagPosition: 'head',
+        },
+        {
+          src: 'https://cdn.jsdelivr.net/npm/daisyui@latest',
+          tagPosition: 'head',
+        },
+       
+      ],
+    },
+  },
+  modules: [
+    '@nuxt/fonts',
+    '@nuxt/icon',
+    '@nuxt/image',
+    '@nuxt/scripts',
+    '@nuxt/ui',
+   ],
+})
