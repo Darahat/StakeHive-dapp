@@ -3,9 +3,7 @@ Here’s a refined, ultra-professional `README.md` for **StakeHive** with recrui
 ````markdown
 # 🚀 StakeHive — Enterprise-Grade DeFi Staking Protocol
 
-<div align="center">
-  <img src="https://raw.githubusercontent.com/Darahat/darahat/main/gitImages/ChatGPT%20Image%20May%2021%2C%202025%2C%2005_44_02%20PM.png" alt="StakeHive Banner" width="800" style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);"/>
-</div>
+![StakeHive](https://cdn.jsdelivr.net/gh/Darahat/darahat@main/gitImages/ChatGPT%20Image%20May%2021%2C%202025%2C%2005_44_02%20PM.png)
 
 A production-ready decentralized staking platform enabling users to stake ERC20 tokens and earn yield rewards. Built with security-first architecture and modern Web3 tooling.
 
