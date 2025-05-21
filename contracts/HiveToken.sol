@@ -1,25 +1,23 @@
-//SPDX-License-Identifier: GPL-3.0
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-contract MyCoin {
-    address public minter;
-    mapping(address => uint) public balances;
-    event Sent(address from, address to, uint amount);
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Permit.sol";
+import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol";
 
-    constructor() {
-        minter = msg.sender;
+contract HiveToken is ERC20, Ownable, ERC20Burnable, ERC20Permit {
+    constructor(
+        uint256 initialSupply
+    )
+        ERC20("HiveToken", "HIVE") // <- ERC20 name and symbol
+        Ownable(msg.sender)
+        ERC20Permit("HiveToken") // <- Permit name
+    {
+        _mint(msg.sender, initialSupply);
     }
 
-    function mint(address receiver, uint amount) public {
-        require(msg.sender == minter, "Only minter can mint");
-        require(amount <= 1e60, "Amount too large");
-        balances[receiver] += amount;
-    }
-
-    function send(address receiver, uint amount) public {
-        require(amount <= balances[msg.sender], "Insufficient balance");
-        balances[msg.sender] -= amount;
-        balances[receiver] += amount;
-        emit Sent(msg.sender, receiver, amount);
+    function mint(address to, uint256 amount) public onlyOwner {
+        _mint(to, amount);
     }
 }
