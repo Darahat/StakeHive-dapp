@@ -3,20 +3,6 @@ Here’s a refined, ultra-professional `README.md` for **StakeHive** with recrui
 ````markdown
 # 🚀 StakeHive — Enterprise-Grade DeFi Staking Protocol
 
-<div align="center">
-  <img src="https://github.com/Darahat/darahat/raw/main/gitImages/ChatGPT%20Image%20May%2021%2C%202025%2C%2005_44_02%20PM.png" alt="StakeHive Banner" width="800" style="border-radius:8px"/>
-</div>
-# Image Test
-
-## Test 1: GitHub's Octocat
-
-![Octocat](https://octodex.github.com/images/dojocat.jpg)
-
-## Test 2: Your Image
-
-![Your Image](https://raw.githubusercontent.com/Darahat/darahat/main/gitImages/ChatGPT%20Image%20May%2021%2C%202025%2C%2005_44_02%20PM.png)
-_A production-ready decentralized staking platform enabling users to stake ERC20 tokens and earn yield rewards._
-
 ---
 
 ## ✨ Key Features
