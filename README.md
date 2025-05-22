@@ -6,6 +6,7 @@ Here’s a refined, ultra-professional `README.md` for **StakeHive** with recrui
 <div align="center">
   <img src="https://github.com/Darahat/darahat/raw/main/gitImages/ChatGPT%20Image%20May%2021%2C%202025%2C%2005_44_02%20PM.png" alt="StakeHive Banner" width="800" style="border-radius:8px"/>
 </div>
+![Test](https://raw.githubusercontent.com/github/media/main/octocats/octocat.png)
 
 _A production-ready decentralized staking platform enabling users to stake ERC20 tokens and earn yield rewards._
 
