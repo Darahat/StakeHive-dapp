@@ -7,13 +7,22 @@ export const useWallet = () => {
     // Reactive state variables
     const account = ref(''); // Stores current wallet address
     const provider = ref(''); // Ethers provider for blockchain Connnection
-    const signer = ref('');
-    const isConnected = computed(() => !!account.value);
+    const signer = ref(''); // Ethers signer for transaction signing
+    const isConnected = computed(() => !!account.value); // Computed property for connection status
 
+    // Wallet connection handler
     constWallet = async () => {
+        // Check if MetaMask is installed
         if (!window.ethereum) {
-            alert('Please install Metamask');
+            alert('Please install Metamask'); // User Feedback if no wallet detected
             return;
+        }
+
+        try {
+            // Request account access from MetaMask
+            await window.ethereum.request({ method: 'eth_requestAccounts' });
+            // Initialize ethers provider with metaMask's provider
+            provider.value = new ethers.providers.Web3Provider(window.ethereum);
         }
         
     }
