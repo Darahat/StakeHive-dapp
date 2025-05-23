@@ -1,5 +1,3 @@
-Here’s a refined, ultra-professional `README.md` for **StakeHive** with recruiter-focused polish:
-
 <div align="center">
   <img src="https://raw.githubusercontent.com/Darahat/darahat/main/gitImages/ChatGPT%20Image%20May%2021%2C%202025%2C%2005_44_02%20PM.png" alt="StakeHive Banner" width="800"/>
 </div>
