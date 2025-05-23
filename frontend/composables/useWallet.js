@@ -1,17 +1,19 @@
 // import ethers.js library for blockchain interaction
-import { ether } from 'ethers'
+import { ethers, BrowserProvider} from 'ethers'
 // Import Vue reactivity utilities
 import { ref, computed } from 'vue'
 // create a reusable wallet composable
 export const useWallet = () => {
+        const { $web3Provider, $ethers } = useNuxtApp();
+
     // Reactive state variables
-    const account = ref(''); // Stores current wallet address
-    const provider = ref(''); // Ethers provider for blockchain Connnection
-    const signer = ref(''); // Ethers signer for transaction signing
+    const account = ref(null); // Stores current wallet address
+    const provider = ref(null); // Ethers provider for blockchain Connnection
+    const signer = ref(null); // Ethers signer for transaction signing
     const isConnected = computed(() => !!account.value); // Computed property for connection status
 
     // Wallet connection handler
-    constWallet = async () => {
+    const connectWallet = async () => {
         // Check if MetaMask is installed
         if (!window.ethereum) {
             alert('Please install Metamask'); // User Feedback if no wallet detected
@@ -22,11 +24,17 @@ export const useWallet = () => {
             // Request account access from MetaMask
             await window.ethereum.request({ method: 'eth_requestAccounts' });
             // Initialize ethers provider with metaMask's provider
-            provider.value = new ethers.providers.Web3Provider(window.ethereum);
+            // provider.value = new BrowserProvider(window.ethereum);
+            // console.log(provider.value);
             // Get signer for transaction signing capability
-            signer.value = provider.value.getSigner();
+            // signer.value = provider.value.getSigner();
+            const signer = await $web3Provider.getSigner();
+                        console.log(signer);
+
             // Get current connected account address
-            account.value = await signer.value.getAddress();
+            account.value = await signer.getAddress();
+                        console.log( account.value );
+
         } catch (error) {
             console.error('Connection Error:', error); // Log Connection errors
         }
