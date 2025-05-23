@@ -1,18 +1,7 @@
 Here’s a refined, ultra-professional `README.md` for **StakeHive** with recruiter-focused polish:
 
 <div align="center">
-  <a href="https://www.linkedin.com/in/darahat/">
-    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
-  </a>
-  <a href="mailto:darahat42@gmail.com">
-    <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail"/>
-  </a>
-  <a href="https://stackoverflow.com/users/3424210">
-    <img src="https://img.shields.io/badge/Stack_Overflow-FE7A16?style=for-the-badge&logo=stack-overflow&logoColor=white" alt="Stack Overflow"/>
-  </a>
-  <a href="https://github.com/Darahat">
-    <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/>
-  </a>
+  <img src="https://raw.githubusercontent.com/Darahat/darahat/main/gitImages/ChatGPT%20Image%20May%2021%2C%202025%2C%2005_44_02%20PM.png" alt="StakeHive Banner" width="800"/>
 </div>
 ````markdown
 # 🚀 StakeHive — Enterprise-Grade DeFi Staking Protocol
