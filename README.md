@@ -22,13 +22,20 @@ Here’s a refined, ultra-professional `README.md` for **StakeHive** with recrui
 
 ## 🏗️ Architecture
 
+You can display this diagram in your Git repository's README.md file using Mermaid. Mermaid allows you to create diagrams and flowcharts using a simple text-based syntax, and GitHub (and many other Git platforms) render these directly in Markdown files.
+
+Here's how you can include your diagram:
+
+Markdown
+
 ```mermaid
 graph TD
-    A[User] -->|Stakes Tokens| B[Nuxt 3 Frontend]
-    B -->|Ethers.js| C[StakeHiveFarm.sol]
-    C -->|ERC20| D[HiveToken.sol]
-    C -->|Emit Events| B
-    D -->|Transfer| C
+A[Frontend: Nuxt3] -->|Ethers.js| B[Smart Contracts]
+B --> C[Blockchain]
+D[Admin Panel: Laravel] --> B
+D --> E[Database]
+F[Users] --> A
+G[Admin] --> D
 ```
 
 ```
