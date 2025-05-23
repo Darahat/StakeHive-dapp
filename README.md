@@ -1,5 +1,19 @@
 Here’s a refined, ultra-professional `README.md` for **StakeHive** with recruiter-focused polish:
 
+<div align="center">
+  <a href="https://www.linkedin.com/in/darahat/">
+    <img src="https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white" alt="LinkedIn"/>
+  </a>
+  <a href="mailto:darahat42@gmail.com">
+    <img src="https://img.shields.io/badge/Gmail-D14836?style=for-the-badge&logo=gmail&logoColor=white" alt="Gmail"/>
+  </a>
+  <a href="https://stackoverflow.com/users/3424210">
+    <img src="https://img.shields.io/badge/Stack_Overflow-FE7A16?style=for-the-badge&logo=stack-overflow&logoColor=white" alt="Stack Overflow"/>
+  </a>
+  <a href="https://github.com/Darahat">
+    <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"/>
+  </a>
+</div>
 ````markdown
 # 🚀 StakeHive — Enterprise-Grade DeFi Staking Protocol
 
@@ -27,21 +41,12 @@ graph TD
     C -->|Emit Events| B
     D -->|Transfer| C
 ```
-````
 
-`````
+```
+
+```
 
 ---
-
-````mermaid
-graph TD
-A[Frontend: Nuxt3] -->|Ethers.js| B[Smart Contracts]
-B --> C[Blockchain]
-D[Admin Panel: Laravel] --> B
-D --> E[Database]
-F[Users] --> A
-G[Admin] --> D
-
 
 ## 🛠️ Technical Stack
 
@@ -119,4 +124,7 @@ _Open to: Senior Web3 roles • Smart Contract audits • DeFi consulting_
 ## 📜 License
 
 MIT License © 2023
-`````
+
+```
+
+```
