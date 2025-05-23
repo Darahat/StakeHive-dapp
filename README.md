@@ -29,7 +29,19 @@ graph TD
 ```
 ````
 
+`````
+
 ---
+
+````mermaid
+graph TD
+A[Frontend: Nuxt3] -->|Ethers.js| B[Smart Contracts]
+B --> C[Blockchain]
+D[Admin Panel: Laravel] --> B
+D --> E[Database]
+F[Users] --> A
+G[Admin] --> D
+
 
 ## 🛠️ Technical Stack
 
@@ -93,11 +105,11 @@ cd frontend && npm run dev
 
 ## 📬 Contact the Developer
 
-**Didarul Alam Rahat**  
+**Didarul Alam Rahat**
 Senior Full Stack & Web3 Developer
 
-🔗 [LinkedIn](https://linkedin.com/in/darahat)  
-📧 [darahat42@gmail.com](mailto:darahat42@gmail.com)  
+🔗 [LinkedIn](https://linkedin.com/in/darahat)
+📧 [darahat42@gmail.com](mailto:darahat42@gmail.com)
 🐦 [@darahat42](https://twitter.com/darahat42)
 
 _Open to: Senior Web3 roles • Smart Contract audits • DeFi consulting_
@@ -107,3 +119,4 @@ _Open to: Senior Web3 roles • Smart Contract audits • DeFi consulting_
 ## 📜 License
 
 MIT License © 2023
+`````
