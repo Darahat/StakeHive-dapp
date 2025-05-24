@@ -1,0 +1,163 @@
+<template>
+  <nav class="bg-hive-dark text-white shadow-lg fixed w-full z-10">
+    <!-- Mobile Menu Button (Hamburger) -->
+    <div class="container mx-auto px-4 py-3 flex justify-between items-center md:hidden">
+      <!-- Logo -->
+      <NuxtLink to="/" class="flex items-center space-x-2">
+        <svg class="w-8 h-8 text-hive-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+        </svg>
+        <span class="text-xl font-bold">StakeHive</span>
+      </NuxtLink>
+      
+      <button @click="toggleMobileMenu" class="p-2 focus:outline-none">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Desktop & Mobile Menu -->
+    <div class="container mx-auto px-4">
+      <div :class="{'hidden': !mobileMenuOpen, 'md:flex': true, 'md:items-center': true, 'md:justify-between': true, 'py-3': true}">
+        <!-- Left Side - Logo & Links -->
+        <div class="flex items-center space-x-2">
+          <NuxtLink to="/" class="hidden md:flex items-center space-x-2">
+            <svg class="w-8 h-8 text-hive-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+            </svg>
+            <span class="text-xl font-bold">StakeHive</span>
+          </NuxtLink>
+          
+          <div class="hidden md:flex space-x-1 ml-10">
+            <NuxtLink to="/dashboard" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-hive-dark-light">Dashboard</NuxtLink>
+            <NuxtLink to="/stake" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-hive-dark-light">Stake</NuxtLink>
+            <NuxtLink to="/rewards" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-hive-dark-light">Rewards</NuxtLink>
+            <NuxtLink to="/docs" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-hive-dark-light">Docs</NuxtLink>
+          </div>
+        </div>
+
+        <!-- Right Side - Wallet & Network -->
+        <div class="flex items-center space-x-4">
+          <div class="hidden md:block px-3 py-1 bg-hive-dark-light rounded-full text-xs">
+            <span class="text-hive-accent">●</span> 
+            <span>Sepolia</span>
+          </div>
+          <ButtonComponent
+          displayMode="wallet"   
+          variant="primary"      
+          :showIcon="true"    
+          @click="wallet.connectWallet"
+          :account="wallet.account"
+        />
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu Dropdown -->
+  <div :class="{'hidden': !mobileMenuOpen, 'md:hidden': true, 'bg-hive-dark-light': true}">
+    <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+      <NuxtLink 
+        to="/dashboard" 
+        class="block px-3 py-2 rounded-md text-base font-medium hover:bg-hive-dark"
+        @click="mobileMenuOpen = false"
+      >
+        Dashboard
+      </NuxtLink>
+      <NuxtLink 
+        to="/stake" 
+        class="block px-3 py-2 rounded-md text-base font-medium hover:bg-hive-dark"
+        @click="mobileMenuOpen = false"
+      >
+        Stake
+      </NuxtLink>
+      <NuxtLink 
+        to="/rewards" 
+        class="block px-3 py-2 rounded-md text-base font-medium hover:bg-hive-dark"
+        @click="mobileMenuOpen = false"
+      >
+        Rewards
+      </NuxtLink>
+      <NuxtLink 
+        to="/docs" 
+        class="block px-3 py-2 rounded-md text-base font-medium hover:bg-hive-dark"
+        @click="mobileMenuOpen = false"
+      >
+        Docs
+      </NuxtLink>
+    </div>
+    <div class="px-3 py-4 border-t border-hive-dark">
+      <div class="flex items-center justify-between">
+        <span class="text-sm">Network: <span class="text-hive-accent">Sepoliad</span></span>
+        <button class="text-hive-primary text-sm font-medium">Switch</button>
+       <ButtonComponent
+          displayMode="wallet"   
+          variant="primary"      
+          :showIcon="true"    
+          @click="wallet.connectWallet"
+          :account="wallet.account"
+        />
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+import ButtonComponent from '@/components/buttonComponent.vue'
+// Import composable
+import { useWalletStore } from '@/stores/walletStore';
+const wallet = useWalletStore();
+// Mobile menu state
+const mobileMenuOpen = ref(false)
+
+// Toggle mobile menu
+const toggleMobileMenu = () => {
+  mobileMenuOpen.value = !mobileMenuOpen.value
+}
+
+// Shorten wallet address for display
+const shortenAddress = (addr) => {
+  return `${addr.substring(0, 6)}...${addr.substring(addr.length - 4)}`
+}
+</script>
+
+<style>
+/* Hive color palette */
+:root {
+  --hive-dark: #1a202c;
+  --hive-dark-light: #2d3748;
+  --hive-primary: #4f46e5;
+  --hive-primary-dark: #4338ca;
+  --hive-accent: #10b981;
+}
+
+.bg-hive-dark {
+  background-color: var(--hive-dark);
+}
+.bg-hive-dark-light {
+  background-color: var(--hive-dark-light);
+}
+.bg-hive-primary {
+  background-color: var(--hive-primary);
+}
+.bg-hive-primary-dark {
+  background-color: var(--hive-primary-dark);
+}
+.text-hive-primary {
+  color: var(--hive-primary);
+}
+.text-hive-accent {
+  color: var(--hive-accent);
+}
+.hover\:bg-hive-dark-light:hover {
+  background-color: var(--hive-dark-light);
+}
+.hover\:bg-hive-dark:hover {
+  background-color: var(--hive-dark);
+}
+.border-hive-dark {
+  border-color: var(--hive-dark);
+}
+</style>

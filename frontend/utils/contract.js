@@ -9,7 +9,17 @@ export const STAKE_HIVE_ABI = [
     'function stake(uint256 _amount) external',
     'function withdraw(uint256 _amount) external',
     'function claimRewards() external',
-    'function getPendingRewards() external',
+    'function getPendingRewards(address user) view returns (uint256)',
     'function stakers(address user) view returns (uint256 amount, uint256 rewardDebt, uint256 lastStakedTime)',
- ]
+]
+// Minimal ERC-20 ABI for HIVE token
+export const ERC20_ABI = [
+  'function balanceOf(address) view returns (uint256)',
+  'function decimals() view returns (uint8)',
+  'function symbol() view returns (string)',
+  'function approve(address spender, uint256 amount) external returns (bool)',
+  'function transfer(address to, uint256 amount) external returns (bool)',
+  'function decimals() view returns (uint8)',
+  'function totalSupply() view returns (uint256)',
+];
 

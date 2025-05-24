@@ -23,5 +23,10 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxt/scripts',
     '@nuxt/ui',
-   ],
+    '@pinia/nuxt',
+    '@pinia-plugin-persistedstate/nuxt',
+  ],
+    piniaPersistedstate: {
+    storage: 'localStorage'
+  }
 })
