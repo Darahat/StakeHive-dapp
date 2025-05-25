@@ -36,6 +36,7 @@ export const useWalletStore = defineStore('wallet', {
      
 // stores/walletStore.js or composables/useWallet.js
  isMetaMaskInstalled() {
+  if (typeof window === 'undefined') return false; // SSR guard
   return typeof window.ethereum !== 'undefined';
 },
 

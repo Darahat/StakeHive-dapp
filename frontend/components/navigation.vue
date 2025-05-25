@@ -146,8 +146,7 @@ const handleConnect = async () => {
     return
     } else {
       try {
-    alert('hello');
-    const account = await wallet.connectWallet();
+     const account = await wallet.connectWallet();
     console.log("Connected to:", account);
     errorMessage.value = null;
   } catch (err) {
