@@ -47,7 +47,7 @@
           displayMode="wallet"   
           variant="primary"      
           :showIcon="true"    
-          @click="wallet.connectWallet"
+          @click="handleConnect"
           :account="wallet.account"
         />
         </div>
@@ -95,9 +95,35 @@
           displayMode="wallet"   
           variant="primary"      
           :showIcon="true"    
-          @click="wallet.connectWallet"
+          @click="handleConnect"
           :account="wallet.account"
         />
+      </div>
+
+    </div>
+  </div>
+         <!-- Modal -->
+  <div v-if="showMetaMaskPrompt" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-2xl p-6 max-w-sm w-full shadow-xl">
+      <h2 class="text-xl font-semibold mb-4">MetaMask Not Detected</h2>
+      <p class="mb-4 text-gray-600">
+        To use this app, you need to install the MetaMask extension in your browser.
+      </p>
+      <div class="flex justify-end space-x-3">
+        <a
+          href="https://metamask.io/download/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
+        >
+          Install MetaMask
+        </a>
+        <button
+          @click="showMetaMaskPrompt = false"
+          class="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition"
+        >
+          Cancel
+        </button>
       </div>
     </div>
   </div>
@@ -111,7 +137,25 @@ import { useWalletStore } from '@/stores/walletStore';
 const wallet = useWalletStore();
 // Mobile menu state
 const mobileMenuOpen = ref(false)
+const errorMessage = ref(null);
+const showMetaMaskPrompt = ref(false);
 
+const handleConnect = async () => {
+    if (!wallet.isMetaMaskInstalled()) {
+     showMetaMaskPrompt.value = true
+    return
+    } else {
+      try {
+    alert('hello');
+    const account = await wallet.connectWallet();
+    console.log("Connected to:", account);
+    errorMessage.value = null;
+  } catch (err) {
+    errorMessage.value = err.message;
+  }
+  }
+
+};
 // Toggle mobile menu
 const toggleMobileMenu = () => {
   mobileMenuOpen.value = !mobileMenuOpen.value

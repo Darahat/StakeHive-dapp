@@ -4,6 +4,7 @@ import { ethers } from 'ethers';
 import { STAKE_HIVE_ADDRESS, HIVE_TOKEN_ADDRESS, STAKE_HIVE_ABI, ERC20_ABI  } from '@/utils/contract.js';
 
 export const useWalletStore = defineStore('wallet', {
+
   state: () => ({
     address: '',
     isConnected: false,
@@ -33,9 +34,16 @@ export const useWalletStore = defineStore('wallet', {
   }),
   actions: {
      
- 
+// stores/walletStore.js or composables/useWallet.js
+ isMetaMaskInstalled() {
+  return typeof window.ethereum !== 'undefined';
+},
+
   
     async connectWallet() {
+
+ 
+
       const { $web3Provider, $ethers } = useNuxtApp();
 
       try {
@@ -103,8 +111,10 @@ export const useWalletStore = defineStore('wallet', {
         console.error("Error fetching token balance:", error);
       }
     },
-    async getStakingData(web3Provider) {
-      try {
+  async getStakingData() {
+     const { $web3Provider } = useNuxtApp();
+    try {
+        const web3Provider = $web3Provider.provider;
         const stakeHiveInfo = this.stakeHiveContracts.STAKEHIVE;
         const stakeHiveContract  = new ethers.Contract(stakeHiveInfo.address, stakeHiveInfo.abi, web3Provider);
         const pendingRewards = await stakeHiveContract.getPendingRewards(this.account);
@@ -114,9 +124,8 @@ export const useWalletStore = defineStore('wallet', {
         const stakerInfo = await stakeHiveContract.stakers(this.account);
         this.stakedAmount = ethers.formatEther(stakerInfo.amount);
         this.rewardDebt = ethers.formatEther(stakerInfo.rewardDebt);
-        console.log("web3Provider", web3Provider);
-        console.log("provider", this.provider);
-        console.log("signer", this.signer);
+        // console.log("web3Provider", web3Provider);
+        
         // console.log("stakedAmount", this.stakedAmount);
         // console.log("rewardDebt", this.rewardDebt);
       }catch (error) {
@@ -141,7 +150,6 @@ export const useWalletStore = defineStore('wallet', {
         const tokenInfo = this.tokenContracts.HIVE;
         //create  contract instance
         const tokenContract = new ethers.Contract(tokenInfo.address, tokenInfo.abi, signer);
-        const decimals = await tokenContract.decimals();
         const amount = ethers.parseUnits(amountinEther.toString(), 18);
         console.log("requested amountinEther:", amount);
         const approveTx = await tokenContract.approve(stakeHiveInfo.address , amount);
@@ -224,9 +232,37 @@ export const useWalletStore = defineStore('wallet', {
 
        await this.getWalletBalance(web3Provider); // <-- Fetch balance after connecting
         await this.getTokenBalance(web3Provider);
-        await this.getStakingData(web3Provider);
-    }
+        await this.getStakingData();
+    },
+      async  transferHiveToken(toAddress, amountinEther){
+        try {
+          const { $web3Provider } = useNuxtApp();
+          const signer = $web3Provider.getSigner();
+          const tokenInfo = this.tokenContracts.HIVE;
+          const tokenContract = new ethers.Contract(tokenInfo.address, tokenInfo.abi, signer);
+          const amount = ethers.parseUnits(amountinEther.toString(), 18);
+          const tx = await tokenContract.transfer(toAddress, amount);
+          console.log("Transfer transaction sent:", tx.hash);
+          const receipt = await tx.wait();
+          if (receipt.status !== 1) {
+            throw new Error("Transfer failed on-chain");
+          }
+          return {
+            hash: tx.hash,
+            receipt,
+            error: null
+          }
+
+        } catch (error) {
+          console.error("Error transferring HIVE tokens:", error);
+          return {
+      success: false,
+      message: error.message,
+    };
+        }
   }
+  }
+
 })
 
 
