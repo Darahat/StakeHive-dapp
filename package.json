@@ -1,5 +1,5 @@
 {
-  "name": "my-solidity-contract",
+  "name": "stakehiv-defi-dapp",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -15,7 +15,7 @@
     "@openzeppelin/hardhat-upgrades": "^3.9.0",
     "@openzeppelin/test-helpers": "^0.5.16",
     "hardhat": "^2.24.0",
-    "hardhat-gas-reporter": "^2.2.3",
+    "hardhat-gas-reporter": "^1.0.8",
     "solidity-coverage": "^0.8.16"
   },
   "dependencies": {

@@ -275,6 +275,18 @@ watch(() => wallet.isConnected, (connected) => {
   if (connected) wallet.loadStakingData();
  
 }, { immediate: true });
+
+const interval = ref(null);
+
+onMounted(() => {
+  wallet.getStakingData();
+  interval.value = setInterval(wallet.getStakingData, 10000);
+});
+
+onUnmounted(() => {
+  clearInterval(interval.value);
+});
+
 //formate all numbers
 const formatNumber = (value) => {
   const num = Number(value);
