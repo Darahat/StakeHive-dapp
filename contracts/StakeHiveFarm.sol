@@ -17,7 +17,7 @@ contract StakeHiveFarm is Ownable {
     // Mapping of user address to their staking information
     mapping(address => StakeInfo) public stakers;
     // Reward rate: how many HIVE tokens per second per token staked
-    uint256 public rewardRatePerSecond = 1e16; //0.01 HIVE per second
+    uint256 public rewardRatePerSecond = 5e15; //0.01 HIVE per second
     // Total amount of tokens staked in by all users
     uint256 public totalStaked;
     //

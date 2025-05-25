@@ -41,8 +41,8 @@
             </div>
             <div>
               <p class="text-sm font-medium text-gray-500">HIVE Balance</p>
-              <p class="text-2xl font-semibold text-gray-900">
-                {{ formatNumber(wallet.tokenBalance) }} <span class="text-gray-500 text-lg">HIVE</span>
+              <p class="text-sm font-semibold text-gray-900">
+                {{ formatNumberShort(wallet.tokenBalance) }} <span class="text-gray-500 text-lg">HIVE</span>
               </p>
             </div>
           </div>
@@ -59,7 +59,7 @@
             <div>
               <p class="text-sm font-medium text-gray-500">Staked Amount</p>
               <p class="text-2xl font-semibold text-gray-900">
-                {{ formatNumber(wallet.stakedAmount ) }} <span class="text-gray-500 text-lg">HIVE</span>
+                {{ formatNumberShort(wallet.stakedAmount ) }} <span class="text-gray-500 text-lg">HIVE</span>
               </p>
             </div>
           </div>
@@ -76,7 +76,7 @@
             <div>
               <p class="text-sm font-medium text-gray-500">Pending Rewards</p>
               <p class="text-2xl font-semibold text-gray-900">
-                {{ formatNumber(wallet.pendingRewards ) }} <span class="text-gray-500 text-lg">HIVE</span>
+                {{ formatNumberShort(wallet.pendingRewards ) }} <span class="text-gray-500 text-lg">HIVE</span>
               </p>
             </div>
           </div>
@@ -107,7 +107,7 @@
                 </div>
               </div>
               <div class="flex justify-between mt-2">
-                <p class="text-xs text-gray-500">Available: {{ formatNumber(wallet.tokenBalance) }} HIVE</p>
+                <p class="text-xs text-gray-500">Available: {{ formatNumberShort(wallet.tokenBalance) }} HIVE</p>
                 <button 
                   @click="stakeAmount = wallet.tokenBalance"
                   class="text-xs text-blue-600 hover:text-blue-800"
@@ -154,7 +154,7 @@
                   </div>
                 </div>
                 <div class="flex justify-between mt-2">
-                  <p class="text-xs text-gray-500">Staked: {{ formatNumber(wallet.stakedAmount) }} HIVE</p>
+                  <p class="text-xs text-gray-500">Staked: {{ formatNumberShort(wallet.stakedAmount) }} HIVE</p>
                   <button 
                     @click="withdrawAmount = wallet.stakedAmount"
                     class="text-xs text-purple-600 hover:text-purple-800"
@@ -183,7 +183,7 @@
             <div class="flex items-center justify-between mb-4">
               <p class="text-sm text-gray-500">Available rewards</p>
               <p class="text-lg font-semibold text-gray-900">
-                {{ formatNumber(formattedPendingRewards) }} HIVE
+                {{ formatNumberShort(wallet.pendingRewards) }} HIVE
               </p>
             </div>
             <button
@@ -283,6 +283,23 @@ const formatNumber = (value) => {
     minimumFractionDigits: 2,
     maximumFractionDigits: 4,
   })
+}
+function formatNumberShort(value) {
+  const num = Number(value);
+  if (isNaN(num)) return value;
+
+  const absNum = Math.abs(num);
+//  if (absNum >= 1e27) return (num / 1e27).toFixed(2) + 'Oc'; // Octillion
+  if (absNum >= 1e24) return (num / 1e24).toFixed(2) + 'Sp'; // Septillion
+  if (absNum >= 1e21) return (num / 1e21).toFixed(2) + 'Sx'; // Sextillion
+  if (absNum >= 1e18) return (num / 1e18).toFixed(2) + 'Qi'; // Quintillion
+  if (absNum >= 1e15) return (num / 1e15).toFixed(2) + 'Qa'; // Quadrillion
+  if (absNum >= 1e12) return (num / 1e12).toFixed(2) + 'T';  // Trillion
+  if (absNum >= 1e9)  return (num / 1e9).toFixed(2) + 'B';   // Billion
+  if (absNum >= 1e6)  return (num / 1e6).toFixed(2) + 'M';   // Million
+  if (absNum >= 1e3)  return (num / 1e3).toFixed(2) + 'K';   // Thousand
+
+  return num.toFixed(2); // Optional: always show 2 decimals
 }
 const shortenAddress = (address) => {
   if (!address) return '';

@@ -1,8 +1,8 @@
 import { ethers } from 'ethers';
 // StakeHiveFarm deployed to 
-export const STAKE_HIVE_ADDRESS = '0x5d2a70eBDa668D72a96D181845a34387E54e16b9';
+export const STAKE_HIVE_ADDRESS = '0xdc9EF61C70Dd0fd144AF3cFBb2dc30e7b5A8A717';
 // HiveToken Deployed to
-export const HIVE_TOKEN_ADDRESS = '0x9CF7441b32C4b6d8b79A6dC73f0bBC3088250519';
+export const HIVE_TOKEN_ADDRESS = '0xBA6D102E57Bda979B68BC4c0c47980CeBeF9075b';
 
 export const STAKE_HIVE_ABI = [
     // Only relevant functions for frontend

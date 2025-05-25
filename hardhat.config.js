@@ -6,9 +6,9 @@ require("solidity-coverage");
 /** @type import('hardhat/config').HardhatUserConfig */
 const { PRIVATE_KEY, SEPOLIA_RPC_URL } = process.env;
 // Force Ethers v6 resolution
-config.resolver = {
-  ethers: require.resolve("ethers")
-};
+// config.resolver = {
+//   ethers: require.resolve("ethers")
+// };
 
 module.exports = {
   solidity: "0.8.28",
