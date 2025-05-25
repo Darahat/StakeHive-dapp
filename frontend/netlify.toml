@@ -1,0 +1,11 @@
+[build]
+  base = "frontend"
+  command = "npm install && npm run build"
+  publish = "frontend/.output/public"
+
+[functions]
+  directory = "frontend/.output/server/functions"
+
+[context.production.environment]
+  NODE_VERSION = "18"
+  NPM_VERSION = "9"
