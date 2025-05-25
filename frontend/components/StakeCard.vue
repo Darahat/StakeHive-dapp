@@ -360,22 +360,25 @@ async function handleTransfer() {
  }
 
 // Auto-refresh logic
-if (wallet.isMetaMaskInstalled()) {
-
+ 
   onMounted(() => {
     // Initial fetch
-    wallet.getStakingData();
+    if (typeof window !== 'undefined') {
 
-    // Refresh every second
-    intervalId = setInterval(() => {
       wallet.getStakingData();
-    }, 1000);
+
+      // Refresh every second
+      intervalId = setInterval(() => {
+        wallet.getStakingData();
+      }, 1000);
+
+    }
   });
 
   onBeforeUnmount(() => {
     clearInterval(intervalId); // Clean up
   });
-}
+ 
 //formate all numbers
 const formatNumber = (value) => {
   const num = Number(value);
