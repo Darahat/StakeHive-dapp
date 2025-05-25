@@ -6,6 +6,7 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'vercel', // or 'netlify' depending on your target
   },
+ 
   app: {
     head: {
       script: [
@@ -29,6 +30,7 @@ export default defineNuxtConfig({
     '@nuxt/ui',
     '@pinia/nuxt',
     '@pinia-plugin-persistedstate/nuxt',
+    '@nuxtjs/eslint-module',
   ],
     piniaPersistedstate: {
     storage: 'localStorage'
