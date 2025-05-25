@@ -6,6 +6,7 @@ export default defineNuxtConfig({
   // nitro: {
   //   preset: 'vercel', // or 'netlify' depending on your target
   // },
+    // target: 'server',
    nitro: {
     preset: 'netlify'  // Required for SSR
   },

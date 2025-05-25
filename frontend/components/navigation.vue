@@ -30,10 +30,10 @@
           </NuxtLink>
           
           <div class="hidden md:flex space-x-1 ml-10">
-            <NuxtLink to="/dashboard" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-hive-dark-light">Dashboard</NuxtLink>
-            <NuxtLink to="/stake" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-hive-dark-light">Stake</NuxtLink>
+            <NuxtLink to="/" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-hive-dark-light">Dashboard</NuxtLink>
+            <!-- <NuxtLink to="/stake" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-hive-dark-light">Stake</NuxtLink>
             <NuxtLink to="/rewards" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-hive-dark-light">Rewards</NuxtLink>
-            <NuxtLink to="/docs" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-hive-dark-light">Docs</NuxtLink>
+            <NuxtLink to="/docs" class="px-3 py-2 rounded-md text-sm font-medium hover:bg-hive-dark-light">Docs</NuxtLink> -->
           </div>
         </div>
 

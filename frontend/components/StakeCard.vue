@@ -334,7 +334,7 @@ const isClaiming = ref(false);
 const txStatus = ref(null);
 const withdrawAmount = ref('0');
 const isWithdrawing = ref(false);
-
+const isTransferring = ref(false);
 const recipient = ref('');
 const amount = ref('');
 const txHash = ref('');
