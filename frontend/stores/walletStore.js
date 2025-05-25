@@ -56,9 +56,7 @@ export const useWalletStore = defineStore('wallet', {
   console.warn("Signer is not set.");
   return;
 }
-        await this.getWalletBalance(web3Provider); // <-- Fetch balance after connecting
-        await this.getTokenBalance(web3Provider);
-        await this.getStakingData(web3Provider);
+        await this.loadStakingData();
 
       } catch (error) {
         console.error("Error connecting to wallet:", error);
@@ -97,7 +95,6 @@ export const useWalletStore = defineStore('wallet', {
          this.tokenBalance = ethers.formatEther(rawBalance);
         // console.log("rawBalance", this.tokenBalance);
 
-         
 
          
          
@@ -138,6 +135,7 @@ export const useWalletStore = defineStore('wallet', {
        
         const stakeHiveInfo = this.stakeHiveContracts.STAKEHIVE;
 
+        const web3Provider = $web3Provider.provider;
 
         //approve token
         const tokenInfo = this.tokenContracts.HIVE;
@@ -154,11 +152,88 @@ export const useWalletStore = defineStore('wallet', {
         const tx = await stakeHiveContract.stake(amount);
         await tx.wait();
         console.log("Staking transaction sent:", tx);
-        
+        await this.loadStakingData();
         // await tx.wait();
        } catch (error) {
         console.error("Error staking:", error);
       }
+    },
+    async claimRewards() {
+      try {
+        const stakeHiveInfo = this.stakeHiveContracts.STAKEHIVE;
+        const { $web3Provider } = useNuxtApp();
+        const signer = $web3Provider.getSigner();
+        const web3Provider = $web3Provider.provider;
+
+        const stakeHiveContract  = new ethers.Contract(stakeHiveInfo.address, stakeHiveInfo.abi, signer);   
+        const tx = await stakeHiveContract.claimRewards();
+        console.log('Claiming tx sent:', tx.hash);
+        await tx.wait();
+        console.log('ClaimRewards tx confiremed:', tx);
+       await this.loadStakingData();
+        return tx;
+      }catch (error) {
+        console.error("Error claiming rewards:", error);
+      }
+    },
+    async withdraw(amountinEther) {
+      const { $web3Provider } = useNuxtApp();
+    
+      try {
+          if (!amountinEther || Number(amountinEther) <= 0) {
+      throw new Error("Invalid withdrawal amount");
+        }
+       //get Signer
+        const signer = await $web3Provider.getSigner();
+        const stakeHiveInfo = this.stakeHiveContracts.STAKEHIVE;
+
+        const stakeHiveContract = new ethers.Contract(stakeHiveInfo.address, stakeHiveInfo.abi, signer);   
+
+        //convert to wei
+        const amount = ethers.parseUnits(amountinEther.toString(), 18);
+
+        //check available balance
+        const stakedInfo = await stakeHiveContract.stakers(this.account);
+
+        if (stakedInfo.amount < amount) {
+          throw new Error("Insufficient staked amount for withdrawal");
+        }
+
+        const tx = await stakeHiveContract.withdraw(amount);
+        console.log('Withdraw tx sent:', tx.hash);
+      //  wait for transaction confirmation (mined)
+        const receipt  = await tx.wait();
+         if (receipt.status !== 1) {
+      throw new Error("Transaction failed on-chain");
+    }
+      await this.loadStakingData();
+        return {
+      hash: receipt.transactionHash,
+      receipt,
+      error: null
+
+    };
+      } catch (error) {
+        
+      }
+    },
+    async loadStakingData() {
+             const { $web3Provider } = useNuxtApp();
+        const web3Provider = $web3Provider.provider;
+
+       await this.getWalletBalance(web3Provider); // <-- Fetch balance after connecting
+        await this.getTokenBalance(web3Provider);
+        await this.getStakingData(web3Provider);
     }
   }
 })
+
+
+// export const STAKE_HIVE_ADDRESS = '0x5d2a70eBDa668D72a96D181845a34387E54e16b9';
+// HiveToken Deployed to
+// export const HIVE_TOKEN_ADDRESS = '0x9CF7441b32C4b6d8b79A6dC73f0bBC3088250519';
+// 464,050.80
+ 
+// Staked Amount
+
+//420.00 
