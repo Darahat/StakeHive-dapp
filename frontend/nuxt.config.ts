@@ -2,6 +2,10 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
+   ssr: true,
+  nitro: {
+    preset: 'vercel', // or 'netlify' depending on your target
+  },
   app: {
     head: {
       script: [
