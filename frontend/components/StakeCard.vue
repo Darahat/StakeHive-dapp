@@ -59,7 +59,7 @@
             <div>
               <p class="text-sm font-medium text-gray-500">Staked Amount</p>
               <p class="text-2xl font-semibold text-gray-900">
-                {{ formatNumber(formattedStakedAmount ) }} <span class="text-gray-500 text-lg">HIVE</span>
+                {{ formatNumber(wallet.stakedAmount ) }} <span class="text-gray-500 text-lg">HIVE</span>
               </p>
             </div>
           </div>
@@ -146,7 +146,7 @@
                     class="block w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:ring-purple-500 focus:border-purple-500"
                     placeholder="0.0"
                     min="0"
-                    :max="wallet.formattedStakedAmount"
+                    :max="wallet.stakedAmount"
                     step="any"
                   >
                   <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
@@ -154,9 +154,9 @@
                   </div>
                 </div>
                 <div class="flex justify-between mt-2">
-                  <p class="text-xs text-gray-500">Staked: {{ formatNumber(formattedStakedAmount) }} HIVE</p>
+                  <p class="text-xs text-gray-500">Staked: {{ formatNumber(wallet.stakedAmount) }} HIVE</p>
                   <button 
-                    @click="withdrawAmount = wallet.formattedStakedAmount"
+                    @click="withdrawAmount = wallet.stakedAmount"
                     class="text-xs text-purple-600 hover:text-purple-800"
                   >
                     Max
@@ -183,7 +183,7 @@
             <div class="flex items-center justify-between mb-4">
               <p class="text-sm text-gray-500">Available rewards</p>
               <p class="text-lg font-semibold text-gray-900">
-                {{ formatNumber(wallet.pendingRewards) }} HIVE
+                {{ formatNumber(formattedPendingRewards) }} HIVE
               </p>
             </div>
             <button
@@ -272,7 +272,7 @@ const withdrawAmount = ref('0');
 const isWithdrawing = ref(false);
 // Auto-load when connected
 watch(() => wallet.isConnected, (connected) => {
-  if (connected) wallet.loadStakingData(); wallet.pendingRewards;
+  if (connected) wallet.loadStakingData();
  
 }, { immediate: true });
 //formate all numbers

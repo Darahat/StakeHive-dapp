@@ -153,6 +153,7 @@ export const useWalletStore = defineStore('wallet', {
         await tx.wait();
         console.log("Staking transaction sent:", tx);
         await this.loadStakingData();
+        return tx;
         // await tx.wait();
        } catch (error) {
         console.error("Error staking:", error);
@@ -232,8 +233,6 @@ export const useWalletStore = defineStore('wallet', {
 // export const STAKE_HIVE_ADDRESS = '0x5d2a70eBDa668D72a96D181845a34387E54e16b9';
 // HiveToken Deployed to
 // export const HIVE_TOKEN_ADDRESS = '0x9CF7441b32C4b6d8b79A6dC73f0bBC3088250519';
-// 464,050.80
+// 453,555.20
  
-// Staked Amount
-
-//420.00 
+// 610.0
