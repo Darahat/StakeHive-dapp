@@ -23,6 +23,7 @@ frontend/node_modules/
 dist/
 frontend/.output/
 frontend/.nuxt/
+frontend/.netlify/
 artifacts/
 cache/
 
