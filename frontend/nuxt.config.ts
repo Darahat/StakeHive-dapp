@@ -5,8 +5,8 @@ export default defineNuxtConfig({
   ssr: true,
   nitro: {
     preset: 'netlify',
-    prerender: {
-      failOnError: false // optional, helpful if you have dynamic pages
+    output: {
+      dir: '.output'
     }
   },
 
