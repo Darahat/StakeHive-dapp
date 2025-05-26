@@ -22,4 +22,8 @@ export const ERC20_ABI = [
   'function decimals() view returns (uint8)',
   'function totalSupply() view returns (uint256)',
 ];
+const HIVE_TOKEN_ABI = [ // Minimum ABI for transfer
+  "function transfer(address to, uint amount) external returns (bool)",
+  "function decimals() public view returns (uint8)"
+];
 
