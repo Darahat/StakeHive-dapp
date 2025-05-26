@@ -6,6 +6,3 @@
 [functions]
   directory = ".output/server/functions"
 
-[context.production.environment]
-  NODE_VERSION = "18"
-  NPM_VERSION = "9"
