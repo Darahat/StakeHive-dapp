@@ -9,7 +9,9 @@ export default defineNuxtConfig({
       dir: '.output'
     }
   },
-
+ routeRules: {
+    '/**': { prerender: true }
+  },
   app: {
     head: {
       script: [
