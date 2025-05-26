@@ -2,11 +2,21 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
-   ssr: true,
-  // nitro: {
-  //   preset: 'vercel', // or 'netlify' depending on your target
-  // },
- 
+  ssr: true,
+   
+    nitro: {
+    preset: 'netlify',
+    prerender: {
+      crawlLinks: true,
+      routes: [
+        '/',
+      ]
+    }
+  },
+  routeRules: {
+    // Add this for SPA fallback
+    '/**': { ssr: false }
+  },
   app: {
     head: {
       script: [
