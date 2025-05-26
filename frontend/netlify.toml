@@ -3,6 +3,5 @@
   command = "npm install && npm run generate"  # For static
   publish = "frontend/dist"
 
-[functions]
-  directory = ".output/server/functions"
+
 
