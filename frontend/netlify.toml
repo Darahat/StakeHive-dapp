@@ -1,7 +1,12 @@
 [build]
   base = "frontend"
-  command = "npm install && npm run generate"  # For static
-  publish = "frontend/dist"
+  command = "npm install && npm run build"
+  publish = ".output/public"
 
+[functions]
+  directory = ".output/server/functions"
 
-
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/server"
+  status = 200

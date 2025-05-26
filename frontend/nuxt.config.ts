@@ -2,14 +2,12 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-05-15',
   devtools: { enabled: true },
-  ssr: false,
-   
-  // nitro: {
-  //   preset: 'vercel', // or 'netlify' depending on your target
-  // },
-    // target: 'server',
-   nitro: {
-    preset: 'netlify'  // Required for SSR
+  ssr: true,
+  nitro: {
+    preset: 'netlify',
+    prerender: {
+      failOnError: false // optional, helpful if you have dynamic pages
+    }
   },
 
   app: {
