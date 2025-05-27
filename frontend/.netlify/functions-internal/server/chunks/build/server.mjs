@@ -442,12 +442,12 @@ const _routes = [
   {
     name: "index",
     path: "/",
-    component: () => import('./index-DFyXl0f-.mjs')
+    component: () => import('./index-ra9czGao.mjs')
   },
   {
     name: "Explore",
     path: "/Explore",
-    component: () => import('./index-BL16mor8.mjs')
+    component: () => import('./index-BS9PT8OL.mjs')
   }
 ];
 const _wrapInTransition = (props, children) => {
@@ -1538,7 +1538,7 @@ const plugin = /* @__PURE__ */ defineNuxtPlugin({
     };
   }
 });
-const LazyIcon = defineAsyncComponent(() => import('./index-Cn79htla.mjs').then((r) => r["default"] || r.default || r));
+const LazyIcon = defineAsyncComponent(() => import('./index-CHKUV-eC.mjs').then((r) => r["default"] || r.default || r));
 const lazyGlobalComponents = [
   ["Icon", LazyIcon]
 ];
@@ -1757,7 +1757,7 @@ const plugins = [
   prerender_server_sqIxOBipVr4FbVMA9kqWL0wT8FPop6sKAXLVfifsJzk
 ];
 const layouts = {
-  default: defineAsyncComponent(() => import('./default-Dx-1KpIo.mjs').then((m) => m.default || m))
+  default: defineAsyncComponent(() => import('./default-Bf5w4Yqj.mjs').then((m) => m.default || m))
 };
 const LayoutLoader = defineComponent({
   name: "LayoutLoader",
@@ -2022,8 +2022,8 @@ const _sfc_main$1 = {
     const statusMessage = _error.statusMessage ?? (is404 ? "Page Not Found" : "Internal Server Error");
     const description = _error.message || _error.toString();
     const stack = void 0;
-    const _Error404 = defineAsyncComponent(() => import('./error-404-B9H9xsGO.mjs'));
-    const _Error = defineAsyncComponent(() => import('./error-500-DQz60Rtj.mjs'));
+    const _Error404 = defineAsyncComponent(() => import('./error-404-4pTtEvyK.mjs'));
+    const _Error = defineAsyncComponent(() => import('./error-500-B6czU0Hn.mjs'));
     const ErrorTemplate = is404 ? _Error404 : _Error;
     return (_ctx, _push, _parent, _attrs) => {
       _push(ssrRenderComponent(unref(ErrorTemplate), mergeProps({ statusCode: unref(statusCode), statusMessage: unref(statusMessage), description: unref(description), stack: unref(stack) }, _attrs), null, _parent));

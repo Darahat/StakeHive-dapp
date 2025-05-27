@@ -12,7 +12,7 @@
                     class="block w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:ring-purple-500 focus:border-purple-500"
                     placeholder="0.0"
                     min="0"
-                    :max="wallet.stakedAmount"
+                    :max="wallet?.stakedAmount"
                     step="any"
                   >
                   <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
@@ -22,7 +22,7 @@
                 <div class="flex justify-between mt-2">
                   <p class="text-xs text-gray-500">Staked: {{ formatedStakedAmount }} HIVE</p>
                   <button 
-                    @click="withdrawAmount = wallet.stakedAmount"
+                    @click="withdrawAmount = wallet?.stakedAmount"
                     class="text-xs text-purple-600 hover:text-purple-800"
                   >
                     Max
@@ -31,7 +31,7 @@
               </div>
               <button
                 @click="withdraw"
-                :disabled="isWithdrawing || !wallet.isConnected || !withdrawAmount || Number(withdrawAmount) <= 0"
+                :disabled="isWithdrawing || !wallet?.isConnected || !withdrawAmount || Number(withdrawAmount) <= 0"
                 class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg text-base font-medium text-white bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 disabled:opacity-70 disabled:cursor-not-allowed transition-colors"
               >
                 <svg v-if="isWithdrawing" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

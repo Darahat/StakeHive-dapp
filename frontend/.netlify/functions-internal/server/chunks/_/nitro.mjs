@@ -4479,7 +4479,7 @@ function _expandFromEnv(value) {
 const _inlineRuntimeConfig = {
   "app": {
     "baseURL": "/",
-    "buildId": "3d0a6167-b8cf-43bb-8ccb-cea8f9946412",
+    "buildId": "5da35447-f2dd-48c2-91dd-f5cc9a63c491",
     "buildAssetsDir": "/_nuxt/",
     "cdnURL": ""
   },
@@ -4944,14 +4944,14 @@ async function errorHandler(error, event) {
 
 const script = "\"use strict\";(()=>{const t=window,e=document.documentElement,c=[\"dark\",\"light\"],n=getStorageValue(\"localStorage\",\"nuxt-color-mode\")||\"system\";let i=n===\"system\"?u():n;const r=e.getAttribute(\"data-color-mode-forced\");r&&(i=r),l(i),t[\"__NUXT_COLOR_MODE__\"]={preference:n,value:i,getColorScheme:u,addColorScheme:l,removeColorScheme:d};function l(o){const s=\"\"+o+\"\",a=\"\";e.classList?e.classList.add(s):e.className+=\" \"+s,a&&e.setAttribute(\"data-\"+a,o)}function d(o){const s=\"\"+o+\"\",a=\"\";e.classList?e.classList.remove(s):e.className=e.className.replace(new RegExp(s,\"g\"),\"\"),a&&e.removeAttribute(\"data-\"+a)}function f(o){return t.matchMedia(\"(prefers-color-scheme\"+o+\")\")}function u(){if(t.matchMedia&&f(\"\").media!==\"not all\"){for(const o of c)if(f(\":\"+o).matches)return o}return\"light\"}})();function getStorageValue(t,e){switch(t){case\"localStorage\":return window.localStorage.getItem(e);case\"sessionStorage\":return window.sessionStorage.getItem(e);case\"cookie\":return getCookie(e);default:return null}}function getCookie(t){const c=(\"; \"+window.document.cookie).split(\"; \"+t+\"=\");if(c.length===2)return c.pop()?.split(\";\").shift()}";
 
-const _LtfLtAPI_glzrVgAMkl_0rzwKgknII2Vj5z4CLpVgE = (function(nitro) {
+const _RNPSVSkAqghJiRL4ZajwgkJ2arQwXIcOBMCYG2Ewj8 = (function(nitro) {
   nitro.hooks.hook("render:html", (htmlContext) => {
     htmlContext.head.push(`<script>${script}<\/script>`);
   });
 });
 
 const plugins = [
-  _LtfLtAPI_glzrVgAMkl_0rzwKgknII2Vj5z4CLpVgE
+  _RNPSVSkAqghJiRL4ZajwgkJ2arQwXIcOBMCYG2Ewj8
 ];
 
 const _DRIVE_LETTER_START_RE = /^[A-Za-z]:\//;
@@ -5036,7 +5036,7 @@ const collections = {
 };
 
 const DEFAULT_ENDPOINT = "https://api.iconify.design";
-const _0zRL04 = defineCachedEventHandler(async (event) => {
+const _qc0eS1 = defineCachedEventHandler(async (event) => {
   const url = getRequestURL(event);
   if (!url)
     return createError$1({ status: 400, message: "Invalid icon request" });
@@ -5088,7 +5088,7 @@ const _0zRL04 = defineCachedEventHandler(async (event) => {
 
 const _SxA8c9 = defineEventHandler(() => {});
 
-const _U1w8rA = lazyEventHandler(() => {
+const _9YsdH5 = lazyEventHandler(() => {
   const opts = useRuntimeConfig().ipx || {};
   const fsDir = opts?.fs?.dir ? (Array.isArray(opts.fs.dir) ? opts.fs.dir : [opts.fs.dir]).map((dir) => isAbsolute(dir) ? dir : fileURLToPath(new URL(dir, globalThis._importMeta_.url))) : void 0;
   const fsStorage = opts.fs?.dir ? ipxFSStorage({ ...opts.fs, dir: fsDir }) : void 0;
@@ -5106,14 +5106,14 @@ const _U1w8rA = lazyEventHandler(() => {
   return useBase(opts.baseURL, ipxHandler);
 });
 
-const _lazy_8yk63k = () => import('../routes/renderer.mjs').then(function (n) { return n.r; });
+const _lazy_DQ54pd = () => import('../routes/renderer.mjs').then(function (n) { return n.r; });
 
 const handlers = [
-  { route: '/__nuxt_error', handler: _lazy_8yk63k, lazy: true, middleware: false, method: undefined },
-  { route: '/api/_nuxt_icon/:collection', handler: _0zRL04, lazy: false, middleware: false, method: undefined },
+  { route: '/__nuxt_error', handler: _lazy_DQ54pd, lazy: true, middleware: false, method: undefined },
+  { route: '/api/_nuxt_icon/:collection', handler: _qc0eS1, lazy: false, middleware: false, method: undefined },
   { route: '/__nuxt_island/**', handler: _SxA8c9, lazy: false, middleware: false, method: undefined },
-  { route: '/_ipx/**', handler: _U1w8rA, lazy: false, middleware: false, method: undefined },
-  { route: '/**', handler: _lazy_8yk63k, lazy: true, middleware: false, method: undefined }
+  { route: '/_ipx/**', handler: _9YsdH5, lazy: false, middleware: false, method: undefined },
+  { route: '/**', handler: _lazy_DQ54pd, lazy: true, middleware: false, method: undefined }
 ];
 
 function createNitroApp() {

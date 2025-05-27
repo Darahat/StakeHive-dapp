@@ -12,7 +12,7 @@
                   class="block w-full px-4 py-3 text-base border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
                   placeholder="0.0"
                   min="0"
-                  :max="wallet.tokenBalance"
+                  :max="formatedtokenBalance"
                   step="any"
                 >
                 <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
@@ -22,7 +22,7 @@
               <div class="flex justify-between mt-2">
                 <p class="text-xs text-gray-500">Available: {{ formatedtokenBalance }} HIVE</p>
                 <button 
-                  @click="stakeAmount = wallet.tokenBalance"
+                  @click="stakeAmount = formatedtokenBalance"
                   class="text-xs text-blue-600 hover:text-blue-800"
                 >
                   Max
@@ -31,7 +31,7 @@
             </div>
             <button
               @click="stake"
-              :disabled="isStaking || !wallet.isConnected || !stakeAmount || Number(stakeAmount) <= 0"
+              :disabled="isStaking || !wallet?.isConnected || !stakeAmount || Number(stakeAmount) <= 0"
               class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg text-base font-medium text-white bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-70 disabled:cursor-not-allowed transition-colors"
             >
               <svg v-if="isStaking" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -61,7 +61,7 @@ const props = defineProps({
 
 });
 const stake = async () => {
-  if (!stakeAmount.value || isStaking.value || !props.wallet.isConnected) return;
+  if (!stakeAmount.value || isStaking.value || !props.wallet?.isConnected) return;
   
   try {
     isStaking.value = true;

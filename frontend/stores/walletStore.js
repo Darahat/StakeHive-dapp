@@ -7,7 +7,6 @@ export const useWalletStore = defineStore('wallet', {
 
   state: () => ({
     address: '',
-    isConnected: false,
     provider: null,
     account: '',
     isConnected: false,
@@ -17,6 +16,12 @@ export const useWalletStore = defineStore('wallet', {
     pendingRewards: '0',
     stakedAmount: '0',
     signer: null,
+    tokenBalance: null,
+    stakingHistory: [], // Array of { timestamp, stakedAmount, rewards }
+    loadingHistory: false,
+    stakeHistory: [],
+    rewardHistory: [],
+    unstakeHistory: [],
     tokenContracts: {
       // Add your token contracts here
       HIVE: {
@@ -112,6 +117,93 @@ export const useWalletStore = defineStore('wallet', {
         console.error("Error fetching token balance:", error);
       }
     },
+ async fetchStakingHistory() {
+  const { $web3Provider } = useNuxtApp(); // Get web3Provider from Nuxt context
+
+   try {
+      this.loadingHistory = true;
+
+    const provider = $web3Provider.provider; // Extract the provider from Nuxt's injected object
+
+     if (!this.account || !provider) {
+      return []; // Return empty array instead of undefined
+    }
+
+    // Get contract details from your store for HIVE token and StakeHive contract
+    const hiveTokenInfo = this.tokenContracts.HIVE;
+    const stakeHiveInfo = this.stakeHiveContracts.STAKEHIVE;
+
+    // Create contract instances with provider (read-only)
+    const hiveToken = new ethers.Contract(hiveTokenInfo.address, hiveTokenInfo.abi, provider);
+    const stakingContract = new ethers.Contract(stakeHiveInfo.address, stakeHiveInfo.abi, provider);
+
+    // Get the current block number from the blockchain
+    const currentBlock = await provider.getBlockNumber();
+
+    // Set a safe starting block to reduce load (e.g., last 20k blocks ~ few days)
+    const fromBlock = Math.max(currentBlock - 20000, 0);
+
+    // Fetch all relevant staking-related events using contract filters
+    const [stakeEvents, unstakeEvents, rewardEvents, transfersToStaking] = await Promise.all([
+      stakingContract.queryFilter(stakingContract.filters.Staked(this.account), fromBlock, 'latest'), // Staked events
+      stakingContract.queryFilter(stakingContract.filters.Unstaked(this.account), fromBlock, 'latest'), // Unstaked events
+      stakingContract.queryFilter(stakingContract.filters.RewardPaid(this.account), fromBlock, 'latest'), // Reward paid events
+      hiveToken.queryFilter(hiveToken.filters.Transfer(this.account, stakeHiveInfo.address), fromBlock, 'latest') // Fallback: direct token transfers to staking contract
+    ]);
+
+    // Helper function to normalize events into a consistent format
+    const processEvents = async (events, type, key, source) => {
+      return Promise.all(events.map(async (e) => {
+        const block = await e.getBlock(); // Fetch the block to get the timestamp
+        return {
+          type, // stake, unstake, reward
+          amount: ethers.formatUnits(e.args[key], 18), // Format token amount to readable ether units
+          timestamp: block.timestamp * 1000, // Convert UNIX timestamp to milliseconds
+          txHash: e.transactionHash, // Transaction hash for reference
+          source // Source of the event: "staking-contract" or "erc20-transfer"
+        };
+      }));
+    };
+
+    // Format all four event groups into a standard structure
+    this.stakeHistory = await processEvents(stakeEvents, 'stake', 'amount', 'staking-contract');
+    this.unstakeHistory = await processEvents(unstakeEvents, 'unstake', 'amount', 'staking-contract');
+    this.rewardHistory = await processEvents(rewardEvents, 'reward', 'reward', 'staking-contract');
+    this.fallbackStakeHistory = await processEvents(transfersToStaking, 'stake', 'value', 'erc20-transfer');
+
+    // Combine all events into one list
+    const combined = [...this.stakeHistory, ...this.unstakeHistory, ...this.rewardHistory, ...this.fallbackStakeHistory];
+
+    // Remove duplicates using txHash + type and sort by timestamp ascending
+    const uniqueSortedHistory = combined
+      .filter((item, index, self) =>
+        index === self.findIndex(t => t.txHash === item.txHash && t.type === item.type)
+      )
+      .sort((a, b) => a.timestamp - b.timestamp);
+
+    // Update the store with the final cleaned and sorted history
+    this.stakingHistory = uniqueSortedHistory;
+
+     console.log("Fetched staking history:", this.stakingHistory); // Debug: Show staking history in console
+ 
+     return this.stakingHistory; // Return the history for further use if needed
+
+  } catch (error) {
+    console.error("Error fetching staking history:", error); // Catch and log any errors
+    this.stakingHistory = []; // Reset history on error
+   } finally {
+    this.loadingHistory = false; // Reset loading state
+  }
+},
+   async loadStakingHistory() {
+  try {
+    // Directly return the result of fetchStakingHistory
+    return await this.fetchStakingHistory();
+  } catch (error) {
+    console.error("Load error:", error);
+    return [];
+  }
+},
   async getStakingData() {
      const { $web3Provider } = useNuxtApp();
     try {
@@ -235,6 +327,9 @@ export const useWalletStore = defineStore('wallet', {
         await this.getTokenBalance(web3Provider);
         await this.getStakingData();
     },
+
+       
+
       async  transferHiveToken(toAddress, amountinEther){
         try {
           const { $web3Provider } = useNuxtApp();
@@ -261,7 +356,10 @@ export const useWalletStore = defineStore('wallet', {
       message: error.message,
     };
         }
-  }
+    }
+      
+      
+      
   }
 
 })

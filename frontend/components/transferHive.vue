@@ -43,7 +43,7 @@
     
     <button
       @click="handleTransfer"
-      :disabled="isTransferring || !wallet.isConnected || !recipient || !amount || Number(amount) <= 0"
+      :disabled="isTransferring || !wallet?.isConnected || !recipient || !amount || Number(amount) <= 0"
       class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg text-base font-medium text-white bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-70 disabled:cursor-not-allowed transition-colors"
     >
       <svg v-if="isTransferring" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

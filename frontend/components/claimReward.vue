@@ -9,7 +9,7 @@
             </div>
             <button
               @click="claim"
-              :disabled="isClaiming || !wallet.isConnected || Number(wallet.pendingRewards) <= 0"
+              :disabled="isClaiming || !wallet?.isConnected || Number(wallet?.pendingRewards) <= 0"
               class="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-lg text-base font-medium text-white bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-70 disabled:cursor-not-allowed transition-colors"
             >
               <svg v-if="isClaiming" class="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -35,13 +35,13 @@ const props = defineProps({
   }
 });
 const claim = async () => {
-  if (isClaiming.value || !props.wallet.isConnected) return;
+  if (isClaiming.value || !props.wallet?.isConnected) return;
   
   try {
     isClaiming.value = true;
     txStatus.value = null;
     
-    const tx = await props.wallet.claimRewards();
+    const tx = await props.wallet?.claimRewards();
     
     txStatus.value = {
       success: true,
@@ -49,7 +49,7 @@ const claim = async () => {
       txHash: tx.hash
     };
     
-    await props.wallet.loadStakingData();
+    await props.wallet?.loadStakingData();
   } catch (error) {
     console.error('Claim failed:', error);
     txStatus.value = {
