@@ -34,9 +34,10 @@ Here’s a simplified view of the StakeHive architecture — how components conn
 
 ```mermaid
 graph TD
-  A[Frontend: Nuxt 3 (Vue 3)] -->|EthersJS calls| B[Smart Contracts (Solidity)]
-  B --> C[Ethereum Blockchain (Sepolia Testnet)]
-  F[Users] --> A
+A[Frontend: Nuxt3] -->|Ethers.js| B[Smart Contracts]
+B --> C[Blockchain]
+F[Users] --> A
+
 
 ```
 
