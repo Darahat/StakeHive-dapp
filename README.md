@@ -1,7 +1,3 @@
-Sure! Here's an updated and polished GitHub README draft based on your project and conversation history, designed to be clear, professional, and user-friendly. It keeps your images and graphs, and highlights what users need to know to understand and run the project.
-
----
-
 <div align="center">
   <img src="https://raw.githubusercontent.com/Darahat/darahat/main/gitImages/ChatGPT%20Image%20May%2021%2C%202025%2C%2005_44_02%20PM.png" alt="StakeHive Banner" width="800" height="400"/>
 </div>
@@ -38,12 +34,10 @@ Here’s a simplified view of the StakeHive architecture — how components conn
 
 ```mermaid
 graph TD
-  A[Frontend: Nuxt 3 (Vue 3)] -->|Ethers.js calls| B[Smart Contracts (Solidity)]
+  A[Frontend: Nuxt 3 (Vue 3)] -->|EthersJS calls| B[Smart Contracts (Solidity)]
   B --> C[Ethereum Blockchain (Sepolia Testnet)]
-  D[Admin Panel: Laravel] --> B
-  D --> E[Database for analytics]
   F[Users] --> A
-  G[Admin] --> D
+
 ```
 
 ---
@@ -164,5 +158,3 @@ Feel free to open issues or submit pull requests to improve the project! Your fe
 **Happy BUIDLing!** 🚀🐝
 
 ---
-
-Would you like me to generate a concise README version for npm or a simpler one for non-dev users?
