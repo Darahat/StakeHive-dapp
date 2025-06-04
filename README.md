@@ -13,6 +13,133 @@ Explore the app live here:
 
 StakeHive is a decentralized finance (DeFi) app enabling users to stake custom HIVE tokens, earn rewards, claim, withdraw, and transfer tokens securely on the blockchain.
 
+How to Use StakeHive
+Want to start staking with StakeHive? Follow these simple steps:
+
+## 🔹 Step 1: Enable Test Networks in MetaMask
+
+By default, MetaMask hides test networks. To enable them:
+
+Open MetaMask.
+
+Click on your account icon → Settings.
+
+Navigate to Advanced.
+
+Scroll to "Show test networks" and toggle it ON.
+
+Close settings, and you'll now see "Sepolia" in the network dropdown.
+
+## 🔹 Step 2: Add Sepolia Testnet (If Not Visible)
+
+If Sepolia is still not showing, you can manually add it:
+
+Click "Select Network" > “Add network” > “Add network manually”.
+
+Fill in:
+
+yaml
+
+`Network Name: Sepolia Test Network
+RPC URL: https://rpc.sepolia.org
+Chain ID: 11155111
+Currency Symbol: ETH
+Block Explorer URL: https://sepolia.etherscan.io`
+
+Click Save.
+
+## 🔹 Step 3: Get Sepolia ETH for Gas
+
+You need Sepolia ETH to pay for gas on the blockchain. Use a testnet faucet:
+
+🔗 Alchemy Sepolia Faucet
+
+🔗 Chainlink Faucet
+
+Paste your MetaMask address and request tokens (limit once every 24 hours).
+
+## 🔹 Step 4: Add HIVE Token to MetaMask
+
+MetaMask does not automatically show custom tokens. To add the HIVE token:
+
+In MetaMask, click "Assets" > "Import tokens".
+
+Use your deployed token address (from deploy.js script or from Etherscan).
+
+Enter the token details:
+
+Token Contract Address: 0xBA6D102E57Bda979B68BC4c0c47980CeBeF9075b
+
+Token Symbol: HIVE
+
+Decimals: 18
+
+Click Add Custom Token.
+
+Now you’ll see your HIVE balance!
+
+## 🔹 Step 5: Connect Wallet to StakeHive dApp
+
+Visit: https://stakehive-defi-dapp.netlify.app
+
+Click "Connect Wallet" (top-right).
+
+Select MetaMask or another preferred wallet (via Web3Modal).
+
+🔁 Core Features: How to Use
+✅ Stake HIVE Tokens
+Make sure you have HIVE tokens in your wallet.
+
+Go to the Stake section.
+
+Enter the amount of HIVE to stake.
+
+Click “Stake”, confirm in MetaMask.
+
+Your tokens are now locked and earning rewards.
+
+## 💸 Claim Rewards
+
+Head to the Rewards tab.
+
+Click “Claim” to collect earned rewards.
+
+Confirm the transaction in MetaMask.
+
+Claimed tokens go directly to your wallet.
+
+## 🔄 Withdraw Staked Tokens
+
+You can only withdraw after the lock period ends.
+
+Go to Staked Balance.
+
+Click “Withdraw”.
+
+Confirm the transaction.
+
+Tokens will return to your wallet.
+
+## 🔁 Transfer HIVE Tokens
+
+Navigate to the Transfer tab.
+
+Enter a recipient wallet address.
+
+Specify the amount to transfer.
+
+Click “Send” → Confirm in MetaMask.
+
+Transaction is confirmed on-chain, tokens reflect instantly.
+
+## 🎯 Pro Tips
+
+Use Sepolia ETH only for test purposes — it holds no real value.
+
+Check all transactions on Sepolia Etherscan.
+
+If you don’t see your tokens in MetaMask after a transaction, click "Import Tokens" and re-enter the HIVE token address.
+
 ---
 
 ## ✨ Key Features
