@@ -30,7 +30,7 @@ Follow this guide to set up and use StakeHive on the Sepolia testnet using MetaM
 - Click **“Import Tokens”** at the bottom of the asset list.
 - Use the following details:
 
-  - **Token Contract Address**: `0xYourHIVETokenAddress`
+  - **Token Contract Address**: `0xBA6D102E57Bda979B68BC4c0c47980CeBeF9075b`
   - **Token Symbol**: `HIVE`
   - **Decimals of Precision**: `18`
 
