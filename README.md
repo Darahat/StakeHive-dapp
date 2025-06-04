@@ -59,6 +59,7 @@ You’ll need Sepolia ETH to pay for gas fees. Use one of the following faucets:
 
 - [Alchemy Sepolia Faucet](https://sepoliafaucet.com/)
 - [Chainlink Sepolia Faucet](https://faucets.chain.link/sepolia)
+- [Google Cloude Sepolia Faucet](https://cloud.google.com/application/web3/faucet/ethereum/sepolia)
 
 Paste your MetaMask wallet address and request test ETH.
 

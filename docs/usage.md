@@ -20,6 +20,11 @@ Follow this guide to set up and use StakeHive on the Sepolia testnet using MetaM
 - Enter your wallet address.
 - Click **Request ETH**.
 - Wait for confirmation — your MetaMask wallet will show test ETH (used for gas).
+  or
+- Visit [https://cloud.google.com/application/web3/faucet/ethereum/sepolia](https://cloud.google.com/application/web3/faucet/ethereum/sepolia)
+- Wallet address or ENS name
+- Click _Reveive 0.05 Sepolia ETH_
+- Wait for confirmation — your MetaMask wallet will show test ETH (used for gas).
 
 ---
 
