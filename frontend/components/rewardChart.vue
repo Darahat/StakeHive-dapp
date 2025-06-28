@@ -67,39 +67,34 @@ const chartOptions = {
   xaxis: {
     type: 'datetime',
     labels: {
-      formatter: function(value) {
-        const date = new Date(value);
-        return date.toLocaleDateString(undefined, {
+      formatter: function (value) {
+        return new Date(value).toLocaleDateString('en-US', {
           year: 'numeric',
-          month: '2-digit',
-          day: '2-digit'
+          month: 'short',
+          day: 'numeric'
         });
       }
-    }
-  },
-  yaxis: {
-    labels: {
-      formatter: function(value) {
-        return parseFloat(value).toFixed(2) + ' HIVE';
+    },
+    yaxis: {
+      labels: {
+        formatter: function (value) {
+          return parseFloat(value).toFixed(2) + ' HIVE';
+        }
       }
-    }
-  },
-  tooltip: {
-    shared: true,
-    intersect: false,
-    y: {
-      formatter: function(value) {
-        return parseFloat(value).toFixed(6) + ' HIVE';
+    },
+    tooltip: {
+      formatter: function (value) {
+        return new Date(value).toLocaleString();
       }
+    },
+    legend: {
+      position: 'bottom',
+      horizontalAlign: 'right'
+    },
+    grid: {
+      borderColor: '#f1f1f1'
     }
   },
-  legend: {
-    position: 'bottom',
-    horizontalAlign: 'right'
-  },
-  grid: {
-    borderColor: '#f1f1f1'
-  }
 };
 
 // Debug watchers
@@ -128,41 +123,45 @@ const series = computed(() => {
     const amount = parseFloat(entry.amount);
     let timestamp = parseInt(entry.timestamp);
 
-    // Convert to milliseconds if in seconds
-    timestamp = timestamp < 10000000000 ? timestamp * 1000 : timestamp;
+    // Skip if invalid amount or timestamp
+    if (isNaN(amount) || isNaN(timestamp)) {
+      console.warn('Invalid entry at index', index, entry);
+      return;
+    }
 
-    if (isNaN(timestamp)) {
-      console.warn('Invalid timestamp at index', index, entry);
+    // Convert timestamp to milliseconds if it's in seconds (Unix timestamp)
+    if (timestamp < 10000000000) {
+      timestamp *= 1000;
+    }
+
+    // Validate the timestamp (should be after 2000)
+    const date = new Date(timestamp);
+    
+    if (date.getFullYear() < 2000) {
+      console.warn('Invalid timestamp (pre-2000) at index', index, {
+        timestamp,
+        date: date.toISOString(),
+        entry
+      });
       return;
     }
 
     switch (entry.type) {
       case 'stake':
-        // cumulativeStake += amount;
-        stakeData.push({ x: timestamp, y: amount });
+        cumulativeStake += amount;
+        stakeData.push({ x: timestamp, y: cumulativeStake });
         break;
       case 'unstake':
-        // cumulativeStake -= amount;
-        stakeData.push({ x: timestamp, y: amount * -1 });
+        cumulativeStake -= amount;
+        stakeData.push({ x: timestamp, y: cumulativeStake });
         break;
-        case 'reward':
-        console.log(`Reward at index ${index}:`, {
-      amount,
-      timestamp,
-      date: new Date(timestamp).toISOString()
-    });
+      case 'reward':
         rewardData.push({ x: timestamp, y: amount });
         break;
     }
   });
 
   hasData.value = stakeData.length > 0 || rewardData.length > 0;
-  console.log('Raw localHistory:', localHistory.value);
-
-  console.log('Processed data:', {
-    stakeData,
-    rewardData
-  });
 
   return [
     { 
@@ -170,7 +169,11 @@ const series = computed(() => {
       data: stakeData,
       color: '#6366F1'
     },
-     
+    {
+      name: 'Rewards',
+      data: rewardData,
+      color: '#10B981'
+    }
   ];
 });
 
